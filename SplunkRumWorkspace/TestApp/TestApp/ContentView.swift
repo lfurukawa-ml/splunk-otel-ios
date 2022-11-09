@@ -60,6 +60,9 @@ struct ContentView: View {
         let null = UnsafePointer<UInt8>(bitPattern: 0)
         let derefNull = null!.pointee
     }
+    func anrCrash() {
+        sleep(10)
+    }
     func manualSpan() {
         let span = OpenTelemetrySDK.instance.tracerProvider.get(instrumentationName: "manual").spanBuilder(spanName: "manualSpan").startSpan()
         span.setAttribute(key: "manualKey", value: "manualValue")
@@ -87,6 +90,11 @@ struct ContentView: View {
                 self.hardCrash()
             }) {
                 Text("Hard crash")
+            }
+            Button(action: {
+                self.anrCrash()
+            }) {
+                Text("ANR")
             }
             Button(action: {
                 self.networkRequest()

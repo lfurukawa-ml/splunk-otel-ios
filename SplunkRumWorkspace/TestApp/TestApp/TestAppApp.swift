@@ -18,18 +18,20 @@ import SwiftUI
 // Why not "import SplunkOtel"?  Because this links as a local framework, not as a swift package.
 // FIXME align the framework name and directory names with the swift package name at some point
 import SplunkRum
+import NewRelic
 
 @main
 struct TestAppApp: App {
     init() {
-        SplunkRum.initialize(beaconUrl: "http://127.0.0.1:3001/", rumAuth: "FAKE_RUM_AUTH",
-                             options: SplunkRumOptions(
-                                allowInsecureBeacon: true,
-                                debug: true,
-                                globalAttributes: ["strKey": "Some string", "intkey": 7],
-                                enableDiskCache: true
-                             )
-        )
+        NewRelic.start(withApplicationToken:"AA1f1b282dde74147c88250f2816a281b5d0d65d99-NRMA")
+//        SplunkRum.initialize(beaconUrl: "http://127.0.0.1:3001/", rumAuth: "FAKE_RUM_AUTH",
+//                             options: SplunkRumOptions(
+//                                allowInsecureBeacon: true,
+//                                debug: true,
+//                                globalAttributes: ["strKey": "Some string", "intkey": 7],
+//                                enableDiskCache: true
+//                             )
+//        )
     }
     var body: some Scene {
         WindowGroup {

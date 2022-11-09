@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		86260F0125CDC2B0009F3CB1 /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86260F0025CDC2B0009F3CB1 /* PreviewAssets.xcassets */; };
 		86AFA86E2714ACB30061A547 /* SplunkRum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86AFA86D2714ACB30061A547 /* SplunkRum.framework */; };
 		86AFA86F2714ACB30061A547 /* SplunkRum.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86AFA86D2714ACB30061A547 /* SplunkRum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96588B4D2908240900FA4F6B /* NewRelic in Frameworks */ = {isa = PBXBuildFile; productRef = 96588B4C2908240900FA4F6B /* NewRelic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86AFA86E2714ACB30061A547 /* SplunkRum.framework in Frameworks */,
+				96588B4D2908240900FA4F6B /* NewRelic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +111,7 @@
 				86260EF325CDC2AF009F3CB1 /* Frameworks */,
 				86260EF425CDC2AF009F3CB1 /* Resources */,
 				86AFA8702714ACB30061A547 /* Embed Frameworks */,
+				96588B4E29082ABF00FA4F6B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -116,6 +119,7 @@
 			);
 			name = TestApp;
 			packageProductDependencies = (
+				96588B4C2908240900FA4F6B /* NewRelic */,
 			);
 			productName = TestApp;
 			productReference = 86260EF625CDC2AF009F3CB1 /* TestApp.app */;
@@ -145,6 +149,7 @@
 			);
 			mainGroup = 86260EED25CDC2AF009F3CB1;
 			packageReferences = (
+				96588B4B2908240900FA4F6B /* XCRemoteSwiftPackageReference "newrelic-ios-agent-spm" */,
 			);
 			productRefGroup = 86260EF725CDC2AF009F3CB1 /* Products */;
 			projectDirPath = "";
@@ -166,6 +171,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		96588B4E29082ABF00FA4F6B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\nif [ -z \"${SCRIPT}\"]; then\n ARTIFACT_DIR=\"${BUILD_DIR%Build/*}SourcePackages/artifacts\"\n SCRIPT=`/usr/bin/find \"${ARTIFACT_DIR}\" -name newrelic_postbuild.sh | head -n 1`\nfi\n\n/bin/sh \"${SCRIPT}\" \"AA1f1b282dde74147c88250f2816a281b5d0d65d99-NRMA\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		86260EF225CDC2AF009F3CB1 /* Sources */ = {
@@ -360,6 +386,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		96588B4B2908240900FA4F6B /* XCRemoteSwiftPackageReference "newrelic-ios-agent-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/newrelic/newrelic-ios-agent-spm";
+			requirement = {
+				kind = exactVersion;
+				version = 7.3.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		96588B4C2908240900FA4F6B /* NewRelic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96588B4B2908240900FA4F6B /* XCRemoteSwiftPackageReference "newrelic-ios-agent-spm" */;
+			productName = NewRelic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 86260EEE25CDC2AF009F3CB1 /* Project object */;
 }
